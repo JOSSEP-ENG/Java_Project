@@ -124,6 +124,7 @@ public class TicTacToeGUI {
     				if(flag == 3) {
     					flag = 0;
     					JOptionPane.showMessageDialog(null, "Player " + currentPlayer + "wins!");
+    					return true;
     				}
     			}
     		}
@@ -138,6 +139,7 @@ public class TicTacToeGUI {
     				if(flag == 3) {
     					flag = 0;
     					JOptionPane.showMessageDialog(null, "Player " + currentPlayer + "wins!");
+    					return true;
     				}
     			}
     		}
