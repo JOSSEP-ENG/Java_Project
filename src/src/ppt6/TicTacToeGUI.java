@@ -73,7 +73,7 @@ public class TicTacToeGUI {
                 buttons[row][col].setEnabled(false);
                 
                 // 이기거나 비기면 모든 버튼 비활성화.
-                if (checkWin() || checkDraw()) {
+                if (checkWin(row, col) || checkDraw()) {
                     disableAllButtons();
                 }
                 // Player 전환.
@@ -87,8 +87,64 @@ public class TicTacToeGUI {
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
 
-    private static boolean checkWin() {
-        // Check rows
+    private static boolean checkWin(int row, int col) {
+    	int flag = 0;
+    	
+    	// Check rows
+    	for(int i=0;i<3;i++) {
+    		if(buttons[row][i].getText().equals(String.valueOf(currentPlayer))) {
+    			++flag;
+    			if(flag == 3) {
+    				flag = 0;
+    				JOptionPane.showMessageDialog(null,"Player " + currentPlayer + "wins!");
+    				return true;
+    			}
+    		}    		
+    	}
+    	flag = 0;
+    	
+    	// Check columns
+    	for(int i=0;i<3;i++) {
+    		if(buttons[i][col].getText().equals(String.valueOf(currentPlayer))) {
+    			++flag;
+    			if(flag == 3) {
+    				flag = 0;
+    				JOptionPane.showMessageDialog(null,"Player " + currentPlayer + "wins!");
+    				return true;
+    			}
+    		}    		
+    	}
+    	flag = 0;
+    	
+    	// Check decreasedDiagonal
+    	if(row == col) {
+    		for(int i=0; i<3; i++) {
+    			if(buttons[i][i].getText().equals(String.valueOf(currentPlayer))) {
+    				++flag;
+    				if(flag == 3) {
+    					flag = 0;
+    					JOptionPane.showMessageDialog(null, "Player " + currentPlayer + "wins!");
+    				}
+    			}
+    		}
+    		flag = 0;
+    	}
+    	
+    	// Check increasedDiagonal
+    	if(row+col == 2) {
+    		for(int i=0; i<3; i++) {
+    			if(buttons[i][2-i].getText().equals(String.valueOf(currentPlayer))) {
+    				++flag;
+    				if(flag == 3) {
+    					flag = 0;
+    					JOptionPane.showMessageDialog(null, "Player " + currentPlayer + "wins!");
+    				}
+    			}
+    		}
+    		flag = 0;
+    	}
+    	
+        /*// Check rows    	
         for (int i = 0; i < 3; i++) {
             if (buttons[i][0].getText().equals(String.valueOf(currentPlayer)) &&
                 buttons[i][1].getText().equals(String.valueOf(currentPlayer)) &&
@@ -96,32 +152,32 @@ public class TicTacToeGUI {
                 JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " wins!");
                 return true;
             }
-        }
-
-        // Check columns
-        for (int j = 0; j < 3; j++) {
+        }*/
+        
+        /*// Check columns
+        for (int j = 0; j < 3; j++) {        	
             if (buttons[0][j].getText().equals(String.valueOf(currentPlayer)) &&
                 buttons[1][j].getText().equals(String.valueOf(currentPlayer)) &&
                 buttons[2][j].getText().equals(String.valueOf(currentPlayer))) {
                 JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " wins!");
                 return true;
             }
-        }
-
-        // Check diagonals
+        }*/
+    	
+        /*// Check diagonals
         if (buttons[0][0].getText().equals(String.valueOf(currentPlayer)) &&
             buttons[1][1].getText().equals(String.valueOf(currentPlayer)) &&
             buttons[2][2].getText().equals(String.valueOf(currentPlayer))) {
             JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " wins!");
             return true;
-        }
-        if (buttons[0][2].getText().equals(String.valueOf(currentPlayer)) &&
+        }*/
+       /* if (buttons[0][2].getText().equals(String.valueOf(currentPlayer)) &&
             buttons[1][1].getText().equals(String.valueOf(currentPlayer)) &&
             buttons[2][0].getText().equals(String.valueOf(currentPlayer))) {
             JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " wins!");
             return true;
-        }
-
+        }*/
+        
         return false;
     }
 
